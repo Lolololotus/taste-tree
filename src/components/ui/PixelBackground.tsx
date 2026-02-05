@@ -12,36 +12,39 @@ export function PixelBackground() {
     if (!mounted) return null;
 
     return (
-        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-            <div className="absolute inset-0 bg-gradient-to-b from-[#e0f2fe] to-[#f0f9ff] dark:from-[#1e293b] dark:to-[#0f172a]" />
+        <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none bg-[var(--bg-cream)]">
+            <div className="absolute inset-0 bg-gradient-to-b from-[#FFFDF5] via-[#E8F8F5] to-[#D4EFDF] opacity-60" />
 
-            {/* Animated Pixel Clouds/Leaves */}
-            {[...Array(6)].map((_, i) => (
+            {/* Soft, Cozy Particles (Sakura/Leaves) */}
+            {[...Array(12)].map((_, i) => (
                 <div
                     key={i}
-                    className="absolute opacity-40 animate-float"
+                    className="absolute opacity-80 animate-float-soft"
                     style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
-                        width: `${Math.random() * 40 + 20}px`,
-                        height: `${Math.random() * 40 + 20}px`,
-                        backgroundColor: i % 2 === 0 ? '#86efac' : '#4ade80', // Greenish pixel leaves
-                        animationDuration: `${Math.random() * 10 + 10}s`,
+                        width: `${Math.random() * 20 + 10}px`,
+                        height: `${Math.random() * 20 + 10}px`,
+                        borderRadius: '40% 60% 70% 30% / 40% 50% 60% 50%', // Organic round shapes
+                        backgroundColor: i % 3 === 0 ? '#FFD3B6' : (i % 3 === 1 ? '#A8E6CF' : '#DCEDC1'),
+                        animationDuration: `${Math.random() * 20 + 10}s`,
                         animationDelay: `-${Math.random() * 10}s`,
-                        boxShadow: '4px 4px 0 rgba(0,0,0,0.1)'
+                        filter: 'blur(1px)', // Soften edges
+                        transform: `rotate(${Math.random() * 360}deg)`
                     }}
                 />
             ))}
 
             <style jsx>{`
-            @keyframes float {
+            @keyframes float-soft {
                 0% { transform: translateY(0) translateX(0) rotate(0deg); }
-                33% { transform: translateY(-20px) translateX(10px) rotate(5deg); }
-                66% { transform: translateY(10px) translateX(-5px) rotate(-5deg); }
+                25% { transform: translateY(-15px) translateX(10px) rotate(5deg); }
+                50% { transform: translateY(-5px) translateX(20px) rotate(10deg); }
+                75% { transform: translateY(10px) translateX(5px) rotate(5deg); }
                 100% { transform: translateY(0) translateX(0) rotate(0deg); }
             }
-            .animate-float {
-                animation: float infinite ease-in-out;
+            .animate-float-soft {
+                animation: float-soft infinite ease-in-out;
             }
         `}</style>
         </div>

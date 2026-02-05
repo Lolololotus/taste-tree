@@ -1,24 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Cozy Pastel Palette */
+  --bg-cream: #FFFDF5;
+  --text-brown: #5D4037;
+  --primary-mint: #A8E6CF;
+  --secondary-pink: #FFD3B6;
+  --accent-blue: #DCEDC1;
+
+  --background: var(--bg-cream);
+  --foreground: var(--text-brown);
 }
 
 @theme inline {
   --font-pixel: var(--font-pixel);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-pixel), monospace, sans-serif;
-  image-rendering: pixelated;
+  font-family: var(--font-pixel), "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Soft Pixel Utility */
+.pixel-soft {
+  box-shadow:
+    -2px 0 0 0 rgba(0, 0, 0, 0.1),
+    2px 0 0 0 rgba(0, 0, 0, 0.1),
+    0 -2px 0 0 rgba(0, 0, 0, 0.1),
+    0 2px 0 0 rgba(0, 0, 0, 0.1);
 }

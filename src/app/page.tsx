@@ -15,14 +15,12 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-center p-4 text-center relative overflow-hidden">
       <PixelBackground />
 
-      <div className="z-10 flex flex-col items-center gap-8 max-w-2xl">
-        <div className="space-y-4">
-          <h1 className="text-3xl md:text-5xl leading-relaxed animate-pulse text-[#15803d] dark:text-[#4ade80]" style={{ textShadow: '2px 2px 0px #000' }}>
-            나만의 취향 나무,<br /> Taste Tree
+      <div className="z-10 flex flex-col items-center gap-10 max-w-2xl bg-[#FFFDF5] p-12 rounded-[2.5rem] shadow-[8px_8px_0px_rgba(220,237,193,0.5)] border-[3px] border-dashed border-[#D7CCC8]">
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-6xl font-bold leading-relaxed text-[#5D4037] tracking-tight">
+            나만의 취향 나무 <span className="text-[#A8E6CF] whitespace-nowrap" style={{ textShadow: '2px 2px 0px #8D6E63' }}>Taste Tree</span>
           </h1>
-          <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 tracking-wider">
-            당신의 취향을 심고 가꿔보세요.
-          </p>
+
         </div>
 
         <Link href="/create">
