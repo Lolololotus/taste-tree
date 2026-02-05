@@ -27,6 +27,10 @@ You must respond with a valid JSON object:
   "trustScore": 0.1 to 1.0 (float), // 1.0 = deeply sincere/detailed.
   "sentiment": "One of: Joy, Nostalgia, Calm, Excitement, Sorrow",
   "tags": ["Keyword1", "Keyword2"],
+  "environment": {
+      "weather": "Sunny" | "Rainy" | "Cloudy" | "Foggy",
+      "time": "Day" | "Night" | "Sunset"
+  },
   "externalInfo": {
     "officialName": "Official Title e.g. 'Toy Story 2'",
     "genre": "e.g. 'Animation / Adventure'",

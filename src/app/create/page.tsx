@@ -22,6 +22,7 @@ export default function CreatePage() {
     const [isCompleted, setIsCompleted] = useState(false);
     const [stage, setStage] = useState(0); // 0: Start -> 5: Full Bloom
     const [currentSentiment, setCurrentSentiment] = useState("Calm");
+    const [environment, setEnvironment] = useState<any>({ weather: "Sunny", time: "Day" });
     const [finalAsset, setFinalAsset] = useState<any>(null);
 
     // T2E State
@@ -63,6 +64,7 @@ export default function CreatePage() {
 
             // Update Sentiment & Stage
             if (data.sentiment) setCurrentSentiment(data.sentiment);
+            if (data.environment) setEnvironment(data.environment);
 
             // Progressive Growth Logic
             if (data.isFinal) {
@@ -112,7 +114,7 @@ export default function CreatePage() {
         <main className="flex min-h-screen flex-col items-center justify-center relative font-pixel overflow-hidden">
 
             {/* Background Garden (Stages 0-5) */}
-            <GardenCanvas stage={stage} sentiment={currentSentiment} />
+            <GardenCanvas stage={stage} sentiment={currentSentiment} environment={environment} />
 
             {/* Header / Wallet Connect */}
             <div className="absolute top-4 right-4 z-20">
