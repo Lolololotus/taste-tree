@@ -65,7 +65,7 @@ export default function CreatePage() {
 
             // Progressive Growth Logic
             if (data.isFinal) {
-                setStage(4); // Bloom
+                setStage(5); // Bloom
                 setIsCompleted(true);
 
                 // Calculate Reward
@@ -83,7 +83,7 @@ export default function CreatePage() {
                 setFinalAsset(newAsset);
                 saveAsset(newAsset);
             } else {
-                setStage(prev => Math.min(prev + 1, 3)); // Grow up to stage 3 during chat
+                setStage(prev => Math.min(prev + 1, 4)); // Grow up to stage 4 during chat
             }
 
             setIsTyping(false);
