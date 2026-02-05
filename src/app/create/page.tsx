@@ -11,6 +11,7 @@ interface Message {
 }
 
 import { GardenCanvas } from '@/components/ui/GardenCanvas';
+import { soundManager } from '@/lib/sound';
 
 export default function CreatePage() {
     const [messages, setMessages] = useState<Message[]>([
@@ -67,6 +68,7 @@ export default function CreatePage() {
             if (data.isFinal) {
                 setStage(5); // Bloom
                 setIsCompleted(true);
+                soundManager.playGrowth(); // Final Bloom Sound
 
                 // Calculate Reward
                 const reward = Math.floor((data.trustScore || 0.5) * 100);
@@ -83,7 +85,11 @@ export default function CreatePage() {
                 setFinalAsset(newAsset);
                 saveAsset(newAsset);
             } else {
-                setStage(prev => Math.min(prev + 1, 4)); // Grow up to stage 4 during chat
+                setStage(prev => {
+                    const next = Math.min(prev + 1, 4);
+                    if (next > prev) soundManager.playGrowth(); // Growth Sound
+                    return next;
+                });
             }
 
             setIsTyping(false);

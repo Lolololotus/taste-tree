@@ -9,6 +9,8 @@ interface TypewriterTextProps {
     onComplete?: () => void;
 }
 
+import { soundManager } from '@/lib/sound';
+
 export function TypewriterText({ text, speed = 100, className = '', onComplete }: TypewriterTextProps) {
     const [displayedText, setDisplayedText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -18,6 +20,8 @@ export function TypewriterText({ text, speed = 100, className = '', onComplete }
             const timeout = setTimeout(() => {
                 setDisplayedText(prev => prev + text[currentIndex]);
                 setCurrentIndex(prev => prev + 1);
+                // Play sound
+                soundManager.playTypewriter();
             }, speed);
 
             return () => clearTimeout(timeout);
