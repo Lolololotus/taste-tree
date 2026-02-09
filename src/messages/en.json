@@ -1,0 +1,14 @@
+{
+    "HomePage": {
+        "title": "Taste Tree",
+        "subtitle": "Your Own Unique Taste Tree",
+        "start": "PLANT A TREE"
+    },
+    "ChatPage": {
+        "placeholder": "Tell me your story...",
+        "thinking": "... Pixel Gardener is thinking ...",
+        "connectWallet": "Connect Wallet",
+        "connected": "Connected"
+    },
+    "NotSupport": "This browser does not support the audio element."
+}

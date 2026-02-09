@@ -9,6 +9,7 @@ export interface AnswerAssetMetadata {
         googleSearchUrl: string;
         keySentiment: string;
     };
+    englishKeywords?: string[]; // Global Taste Pin
 }
 
 export interface AnswerAsset {

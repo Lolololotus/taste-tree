@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { PixelButton } from "@/components/ui/PixelButton";
 import { PixelBackground } from "@/components/ui/PixelBackground";
 

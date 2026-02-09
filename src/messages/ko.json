@@ -1,0 +1,14 @@
+{
+    "HomePage": {
+        "title": "Taste Tree",
+        "subtitle": "나만의 취향 나무",
+        "start": "나무 심기 START"
+    },
+    "ChatPage": {
+        "placeholder": "이야기를 들려주세요...",
+        "thinking": "... 픽셀 정원사가 생각 중입니다 ...",
+        "connectWallet": "지갑 연결",
+        "connected": "연결됨"
+    },
+    "NotSupport": "이 브라우저는 오디오 요소를 지원하지 않습니다."
+}

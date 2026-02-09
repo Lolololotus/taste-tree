@@ -3,15 +3,18 @@
 > **Document Version**: 1.0.0
 > **Last Updated**: 2026-02-05
 
-## 1. System Overview (개요)
+## 1. System Overview (Vision Internalization)
 
-**Taste Tree**는 사용자의 추억과 취향을 대화를 통해 추출하고, 이를 **Answer_Asset**이라는 정형화된 데이터 자산으로 변환하는 **AI Native Web Application**입니다.
-이 프로젝트의 핵심 기술 목표는 **비정형 자연어 데이터의 자산화(Assetization)** 및 **사용자 심리 상태와 연동된 동적 렌더링(Dynamic Rendering)**입니다.
+**Taste Tree**는 단순한 취향 기록 앱이 아닌, **'다정한 기술 생태계(Gentle Tech Ecosystem)'**를 지향하는 디지털 정원입니다.
+우리는 유저의 대화를 단순 텍스트로 보지 않고, **'디지털 인류학(Digital Anthropology)'**적 가치를 지닌 '욕망의 아카이브'로 정의합니다.
+
+이 프로젝트의 핵심은 **Data Sovereignty(데이터 주권)**의 실현입니다. 유저의 사유와 취향은 **Answer_Asset**이라는 독립적인 객체로 관리되며, 시스템은 이 자산의 가치를 $trustScore 로직을 통해 증명하고 보상합니다.
 
 ### 🌟 Key Technical Features
-- **Hyper-Personalized Persona**: Google Gemini API 기반의 페르소나 튜닝 (Psychological Novelist).
-- **Dynamic Garden Rendering**: Sentiment & Environment Analysis를 통한 실시간 Canvas 렌더링.
-- **Assetization Protocol**: 대화의 깊이(Depth)와 신뢰도(TrustScore)를 정량화하여 토큰 보상 산출.
+- **Gentle Tech Persona**: "상냥한 정원사" 페르소나 (Jimini)가 유저의 대화를 이끌어냅니다.
+- **Answer_Asset Protocol**: 대화의 깊이와 진정성을 정량화하여 자산으로 변환하는 로직.
+- **Living Pixel Garden**: 사용자의 감정과 성장에 동기화된 파스텔 톤 픽셀 아트 세계.
+- **Trust Score Algorithm**: 답변의 인류학적 가치를 평가하는 독자적인 스코어링 시스템.
 
 ---
 
@@ -68,11 +71,16 @@ AI는 사용자의 답변을 단순 텍스트가 아닌 '진정성' 기준으로
 ### 3.2 Dynamic Environment Rendering
 사용자의 감정 상태(Sentiment)는 시각적 날씨와 시간대로 직결됩니다.
 
-| Sentiment Group | Weather | Time | Palette |
-|-----------------|---------|------|---------|
-| **Joy / Excitement** | Sunny | Day | Vibrant Green/Pink |
-| **Nostalgia / Warmth** | Clear | Sunset | Orange/Brown |
 | **Sorrow / Calm** | Rainy | Night | Blue/Deep Green |
+
+### 3.3 Taste Pin Logic (Global Connectivity)
+**Taste Pin**은 Answer_Asset의 Vector Similarity를 기반으로 작동하는 시각적 연결 프로토콜입니다.
+
+1.  **Pin Drop**: Stage 5(Bloom) 도달 시, 유저의 IP(혹은 설정된 도시) 위치에 8-bit Pin이 생성됩니다.
+2.  **Similarity Search**: Vector DB에서 코사인 유사도(Cosine Similarity) 0.85 이상의 Answer_Asset을 보유한 다른 유저를 스캔합니다.
+3.  **Resonance Effect**:
+    -   유사 유저(Taste Twin)의 핀이 지도 상에서 은은하게 점멸(Pulse Animation).
+    -   연결 시 "안개가 걷히는(Fog reveal)" 연출과 함께 따뜻한 차임벨 사운드(Chime) 재생.
 
 ---
 

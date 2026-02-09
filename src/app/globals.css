@@ -1,19 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  /* Cozy Pastel Palette */
-  --bg-cream: #FFFDF5;
-  --text-brown: #5D4037;
-  --primary-mint: #A8E6CF;
-  --secondary-pink: #FFD3B6;
-  --accent-blue: #DCEDC1;
-
+  /* Official Taste Tree Palette (Phase 1) */
+  --bg-cream: #FFFDF0;  /* Ivory Cream */
+  --text-brown: #795548; /* Warm Brown */
+  
+  /* Bubbles */
+  --bubble-mint: #E0F7FA;
+  --bubble-pink: #FCE4EC;
+  
   --background: var(--bg-cream);
   --foreground: var(--text-brown);
 }
 
 @theme inline {
   --font-pixel: var(--font-pixel);
+  
+  --color-bg-cream: var(--bg-cream);
+  --color-text-brown: var(--text-brown);
+  --color-bubble-mint: var(--bubble-mint);
+  --color-bubble-pink: var(--bubble-pink);
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+  }
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
 }
 
 body {
@@ -23,11 +47,55 @@ body {
   overflow-x: hidden;
 }
 
-/* Soft Pixel Utility */
-.pixel-soft {
-  box-shadow:
-    -2px 0 0 0 rgba(0, 0, 0, 0.1),
-    2px 0 0 0 rgba(0, 0, 0, 0.1),
-    0 -2px 0 0 rgba(0, 0, 0, 0.1),
-    0 2px 0 0 rgba(0, 0, 0, 0.1);
+/* Pixel Stepped Rounding Utility */
+.pixel-box {
+  background: white;
+  box-shadow: 
+    -4px 0 0 0 var(--text-brown),
+    4px 0 0 0 var(--text-brown),
+    0 -4px 0 0 var(--text-brown),
+    0 4px 0 0 var(--text-brown);
+  margin: 4px;
+  position: relative;
+}
+
+/* Pixel Tail - Left (Jimini) */
+.pixel-tail-left::before {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  left: -8px;
+  width: 4px;
+  height: 4px;
+  background: var(--text-brown);
+  box-shadow: 
+    0 4px 0 0 var(--text-brown),
+    4px 4px 0 0 var(--text-brown);     
+}
+/* Inner color patch to hide border if needed, or just simple separate block */
+
+/* Pixel Tail - Right (User) */
+.pixel-tail-right::before {
+  content: "";
+  position: absolute;
+  bottom: 6px;
+  right: -8px;
+  width: 4px;
+  height: 4px;
+  background: var(--text-brown);
+  box-shadow: 
+    0 4px 0 0 var(--text-brown),
+    -4px 4px 0 0 var(--text-brown);
+}
+
+/* Floating Animation Utility */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pattern Dither Utility */
+.pattern-dither {
+  background-image: radial-gradient(var(--text-brown) 1px, transparent 1px);
+  background-size: 8px 8px;
+  opacity: 0.1;
 }

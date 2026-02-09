@@ -9,7 +9,7 @@ export const createAnswerAsset = (
     content: string,
     tags: string[] = [],
     chatHistory: any[] = [],
-    aiAnalysis: { trustScore?: number, externalInfo?: AnswerAssetMetadata['externalInfo'] } = {}
+    aiAnalysis: { trustScore?: number, externalInfo?: AnswerAssetMetadata['externalInfo'], englishKeywords?: string[] } = {}
 ): AnswerAsset => {
     return {
         id: `asset_${generateId()}`,
@@ -23,7 +23,8 @@ export const createAnswerAsset = (
             updatedAt: new Date().toISOString(),
             editCount: 0,
             trustScore: aiAnalysis.trustScore || 1.0,
-            externalInfo: aiAnalysis.externalInfo
+            externalInfo: aiAnalysis.externalInfo,
+            englishKeywords: aiAnalysis.englishKeywords
         }
     };
 };
