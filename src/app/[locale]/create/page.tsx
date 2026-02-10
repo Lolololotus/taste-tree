@@ -174,15 +174,20 @@ export default function CreatePage() {
         }
     };
 
+    // Dynamic Complexity Calculation
+    const complexity = collectedAssets.length > 0
+        ? collectedAssets.reduce((acc, curr) => acc + (curr.metadata.trustScore || 0.5), 0) / collectedAssets.length
+        : 0.5;
+
     return (
         <main className="flex min-h-screen flex-col items-center justify-center relative font-pixel overflow-hidden">
 
             {/* Background Garden (Visual Stage matches Logic Stage) */}
-            {/* Map 7 stages to 0-5 Visual Stages roughly */}
             <GardenCanvas
-                stage={Math.min(stage, 5)}
+                stage={Math.min(stage, 6)}
                 sentiment={currentSentiment}
                 environment={environment}
+                complexity={complexity}
             />
 
             {/* Hidden Capture Area */}

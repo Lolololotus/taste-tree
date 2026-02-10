@@ -3,54 +3,67 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 interface GardenCanvasProps {
-    stage: number; // 0 to 5
+    stage: number; // 0 to 6
     sentiment: string;
     environment?: {
         weather: "Sunny" | "Rainy" | "Cloudy" | "Foggy";
         time: "Day" | "Night" | "Sunset";
     };
+    complexity?: number; // 0.0 to 1.0 (Based on Trust Score)
 }
 
-export function GardenCanvas({ stage, sentiment, environment }: GardenCanvasProps) {
+export function GardenCanvas({ stage, sentiment, environment, complexity = 0.5 }: GardenCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
-    // Time & Weather Defaults
-    const time = environment?.time || "Day";
-    const weather = environment?.weather || "Sunny";
+    // 🎨 Sentiment Palette System
+    const getPalette = (sentiment: string, time: string) => {
+        const s = sentiment.toLowerCase();
 
-    // Sentiment Palette Logic
-    const getColors = (sentiment: string, time: string) => {
-        let base = { leaf: "#81C784", trunk: "#795548", bloom: "#FFF176", bg: "#FFFDF0" };
+        // Base Palettes
+        const palettes: any = {
+            warm: { // Joy, Excitement
+                bg: "#FFF9C4", // Light Yellow
+                sky: "#FFF176",
+                trunk: "#795548",
+                leaf: ["#76FF03", "#64DD17", "#C6FF00"], // Vibrant Greens
+                flower: "#F50057" // Pink
+            },
+            cool: { // Calm, Peace
+                bg: "#E0F7FA", // Light Cyan
+                sky: "#B2EBF2",
+                trunk: "#5D4037",
+                leaf: ["#26C6DA", "#00BCD4", "#80DEEA"], // Teal/Blue Greens
+                flower: "#651FFF" // Violet
+            },
+            nostalgia: { // Nostalgia, Sorrow
+                bg: "#FFF3E0", // Light Orange
+                sky: "#FFCC80",
+                trunk: "#4E342E",
+                leaf: ["#FFAB91", "#FF8A65", "#FF7043"], // Autumn tones
+                flower: "#D50000" // Red
+            },
+            night: {
+                bg: "#1A237E", // Deep Blue
+                sky: "#303F9F",
+                trunk: "#3E2723",
+                leaf: ["#1B5E20", "#2E7D32", "#388E3C"], // Dark Greens
+                flower: "#E040FB" // Neon Purple
+            }
+        };
 
-        if (["Joy", "Excitement", "즐거움", "설렘", "신남"].some(s => sentiment.includes(s))) {
-            base = { leaf: "#76FF03", trunk: "#8D6E63", bloom: "#F50057", bg: "#F1F8E9" };
-        } else if (["Nostalgia", "Warmth", "그리움", "따뜻함", "위로"].some(s => sentiment.includes(s))) {
-            base = { leaf: "#FFB74D", trunk: "#5D4037", bloom: "#FF6E40", bg: "#FFF3E0" };
-        } else if (["Sorrow", "Calm", "고독", "아련함", "슬픔"].some(s => sentiment.includes(s))) {
-            base = { leaf: "#4DD0E1", trunk: "#3E2723", bloom: "#AA00FF", bg: "#E0F7FA" };
-        }
+        if (time === "Night") return palettes.night;
 
-        if (time === "Night") {
-            base.bg = "#1A237E";
-            // Night adjustments
-            base.leaf = "#2E7D32";
-        } else if (time === "Sunset") {
-            base.bg = "#FFCC80";
-        }
-
-        return base;
+        if (["joy", "excitement", "즐거움", "설렘"].some(k => s.includes(k))) return palettes.warm;
+        if (["nostalgia", "sorrow", "그리움", "슬픔"].some(k => s.includes(k))) return palettes.nostalgia;
+        return palettes.cool; // Default
     };
 
-    const colors = getColors(sentiment, time);
+    const palette = getPalette(sentiment, environment?.time || "Day");
 
     useEffect(() => {
         const handleResize = () => {
-            // Debounce or just set
-            setDimensions({
-                width: window.innerWidth,
-                height: window.innerHeight,
-            });
+            setDimensions({ width: window.innerWidth, height: window.innerHeight });
         };
         window.addEventListener('resize', handleResize);
         handleResize();
@@ -63,120 +76,129 @@ export function GardenCanvas({ stage, sentiment, environment }: GardenCanvasProp
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
+        // Reset
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         const pixelSize = 4;
-        ctx.imageSmoothingEnabled = false;
 
-        // 1. Background Fill
-        ctx.fillStyle = colors.bg;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // 1. Background (Gradient-ish)
+        const drawBackground = () => {
+            const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            grad.addColorStop(0, palette.bg);
+            grad.addColorStop(1, palette.sky);
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // 2. Dithered Pattern Overlay (Dot Pattern)
-        const drawDither = () => {
-            ctx.fillStyle = "rgba(121, 85, 72, 0.05)"; // Very subtle brown dot
-            for (let x = 0; x < canvas.width; x += 8) {
-                for (let y = 0; y < canvas.height; y += 8) {
-                    if ((x + y) % 16 === 0) {
-                        ctx.fillRect(x, y, 2, 2);
-                    }
+            // Dither
+            ctx.fillStyle = "rgba(0,0,0,0.03)";
+            for (let x = 0; x < canvas.width; x += 4) {
+                for (let y = 0; y < canvas.height; y += 4) {
+                    if ((x + y) % 8 === 0) ctx.fillRect(x, y, 2, 2);
                 }
             }
         };
-        drawDither();
+        drawBackground();
 
-        // 3. Ground
+        // 2. Ground
         const groundY = canvas.height - 100;
-        ctx.fillStyle = time === "Night" ? "#004D40" : "#E0F2F1";
+        ctx.fillStyle = environment?.time === "Night" ? "#004D40" : "#E0F2F1";
         ctx.fillRect(0, groundY, canvas.width, 100);
 
-        // Pixel Border for Ground
-        ctx.fillStyle = time === "Night" ? "#00695C" : "#B2DFDB";
-        ctx.fillRect(0, groundY, canvas.width, 4);
-
-        // Helper: Draw Scaled Pixel
-        const drawPx = (x: number, y: number, color: string) => {
+        // Helper: Draw Pixel Line
+        const drawPx = (x: number, y: number, color: string, size: number) => {
             ctx.fillStyle = color;
-            ctx.fillRect(x, y, pixelSize, pixelSize);
+            ctx.fillRect(Math.floor(x / pixelSize) * pixelSize, Math.floor(y / pixelSize) * pixelSize, size, size);
         };
 
-        const drawRectPx = (x: number, y: number, w: number, h: number, color: string) => {
-            ctx.fillStyle = color;
-            ctx.fillRect(x, y, w * pixelSize, h * pixelSize);
-        };
+        // 3. Recursive Fractal Tree
+        const drawBranch = (x: number, y: number, len: number, angle: number, width: number) => {
 
-        // 4. Tree Growth Animation (Frame-by-Frame Logic)
-        const centerX = Math.floor(canvas.width / 2);
-        const { trunk, leaf, bloom } = colors;
+            // Draw current branch segment
+            ctx.beginPath();
+            ctx.save();
+            ctx.strokeStyle = palette.trunk;
+            ctx.lineWidth = width;
+            ctx.lineCap = "square";
+            ctx.translate(x, y);
+            ctx.rotate(angle * Math.PI / 180);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -len);
+            ctx.stroke();
 
-        // Stage 0: Seed
-        if (stage === 0) {
-            drawRectPx(centerX, groundY - 4, 3, 3, "#5D4037"); // Seed in ground
-        }
+            // Calculate end point of this branch
+            // (Standard trig to find new x,y)
+            // But since we translated, new origin is 0,0. 
+            // We need absolute coordinates for next recursion if we didn't use restore(), 
+            // but restore() makes it easier. 
+            // Actually, to keep pixel snap, let's use absolute math:
+            // This is a simple vector approach
 
-        // Stage 1: Sprout
-        if (stage >= 1) {
-            drawRectPx(centerX, groundY - 8, 2, 8, "#81C784"); // Stem
-            drawRectPx(centerX - 3, groundY - 12, 3, 4, leaf); // Left Leaf
-            drawRectPx(centerX + 2, groundY - 12, 3, 4, leaf); // Right Leaf
-        }
+            ctx.restore();
 
-        // Stage 2: Sapling
-        if (stage >= 2) {
-            drawRectPx(centerX, groundY - 20, 4, 20, trunk); // Taller Trunk
-            drawRectPx(centerX - 8, groundY - 28, 8, 8, leaf); // Foliage
-            drawRectPx(centerX + 4, groundY - 24, 8, 8, leaf);
-            drawRectPx(centerX - 2, groundY - 35, 8, 8, leaf); // Top
-        }
-
-        // Stage 3: Small Tree
-        if (stage >= 3) {
-            drawRectPx(centerX, groundY - 40, 6, 40, trunk);
-            // Branches
-            drawRectPx(centerX - 10, groundY - 25, 10, 3, trunk);
-            drawRectPx(centerX + 6, groundY - 30, 10, 3, trunk);
-
-            // Foliage Clusters
-            drawRectPx(centerX - 20, groundY - 45, 15, 15, leaf);
-            drawRectPx(centerX + 5, groundY - 55, 15, 15, leaf);
-            drawRectPx(centerX - 5, groundY - 70, 15, 15, leaf);
-        }
-
-        // Stage 4: Tree
-        if (stage >= 4) {
-            // Thicker Trunk
-            drawRectPx(centerX - 2, groundY - 60, 10, 60, trunk);
-
-            // Massive Foliage
-            drawRectPx(centerX - 35, groundY - 50, 25, 20, leaf);
-            drawRectPx(centerX + 15, groundY - 60, 25, 20, leaf);
-            drawRectPx(centerX - 20, groundY - 90, 40, 40, leaf);
-            drawRectPx(centerX - 40, groundY - 70, 20, 20, leaf);
-            drawRectPx(centerX + 10, groundY - 80, 20, 20, leaf);
-        }
-
-        // Stage 5: Bloom (Add Flowers)
-        if (stage >= 5) {
-            // Random-ish looking positions relative to center
-            const bloomPos = [
-                [-10, -85], [10, -75], [-25, -55], [25, -55],
-                [0, -95], [-35, -45], [30, -65]
-            ];
-            bloomPos.forEach(([bx, by]) => {
-                drawRectPx(centerX + bx, groundY + by, 3, 3, bloom);
-                drawRectPx(centerX + bx + 1, groundY + by + 1, 1, 1, "#FFF"); // Shine
-            });
-        }
-
-        // 5. Weather Effects
-        if (weather === "Rainy") {
-            ctx.fillStyle = "rgba(100, 181, 246, 0.5)";
-            for (let i = 0; i < 60; i++) {
-                const rx = Math.random() * canvas.width;
-                const ry = Math.random() * canvas.height;
-                ctx.fillRect(rx, ry, 2, 15);
+            if (len < 10) {
+                // LEAVES (Terminal)
+                if (stage >= 2) {
+                    const leafColor = palette.leaf[Math.floor(Math.random() * palette.leaf.length)];
+                    // Draw a cluster of pixels
+                    drawPx(x + Math.sin(angle) * len, y - Math.cos(angle) * len, leafColor, pixelSize * 2);
+                }
+                // FLOWERS (Bloom Stage)
+                if (stage >= 5 && Math.random() > 0.7) {
+                    drawPx(x + Math.sin(angle) * len, y - Math.cos(angle) * len, palette.flower, pixelSize * 1.5);
+                }
+                return;
             }
+
+            // Calculate end points for recursion
+            const endX = x + len * Math.sin(angle * Math.PI / 180);
+            const endY = y - len * Math.cos(angle * Math.PI / 180);
+
+            // Recursion rules based on Complexity & Stage
+            const subLen = len * 0.75; // Shrink factor
+            const subWidth = Math.max(1, width * 0.7);
+
+            // Bias angle slightly for wind/organic feel
+            const wind = (Math.random() - 0.5) * 10;
+
+            // Left Branch
+            if (stage > 0) {
+                drawBranch(endX, endY, subLen, angle - 25 + wind, subWidth);
+            }
+            // Right Branch
+            if (stage > 1) {
+                drawBranch(endX, endY, subLen, angle + 25 + wind, subWidth);
+            }
+            // Center Branch (High Complexity only)
+            if (stage > 3 && complexity > 0.7) {
+                drawBranch(endX, endY, subLen, angle + wind, subWidth);
+            }
+        };
+
+        // Render Tree Root
+        const startX = canvas.width / 2;
+        const startY = groundY;
+
+        // Initial Trunk Size based on Stage
+        const baseLen = stage === 0 ? 0 : 40 + (stage * 15);
+        const baseWidth = stage === 0 ? 0 : 4 + (stage * 2);
+
+        if (stage === 0) {
+            // Seed
+            drawPx(startX, startY + 10, palette.trunk, 8);
+        } else {
+            drawBranch(startX, startY, baseLen, 0, baseWidth);
         }
 
-    }, [stage, colors, dimensions, weather, time]);
+        // 4. Particles (Floating Memories)
+        // Simple random particles
+        ctx.fillStyle = palette.sky; // slightly darker than bg
+        for (let i = 0; i < 10 + (stage * 5); i++) {
+            const px = Math.random() * canvas.width;
+            const py = Math.random() * groundY;
+            ctx.fillRect(px, py, 2, 2);
+        }
+
+    }, [dimensions, stage, sentiment, environment, complexity]);
 
     return (
         <canvas
