@@ -1,4 +1,6 @@
 import { AnswerAsset, AnswerAssetMetadata } from "@/types/t2e";
+import { db } from "./firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 // Mock helper to generate IDs (In real app, backend handles this)
 const generateId = () => Math.random().toString(36).substring(2, 9);
@@ -29,16 +31,35 @@ export const createAnswerAsset = (
     };
 };
 
-export const saveAsset = (asset: AnswerAsset) => {
-    // Simulate Blockchain/DB storage
+export const saveAsset = async (asset: AnswerAsset) => {
+    // 1. Local Log (Simulator)
     console.log("------------------------------------------");
     console.log("💾 [T2E System] Saving Asset to Ledger...");
     console.log("Asset ID:", asset.id);
-    console.log("Trust Score:", asset.metadata.trustScore);
-    console.log("Content:", asset.content);
-    console.log("Tags:", asset.tags);
-    console.log("Chat History Length:", asset.chatHistory?.length);
-    console.log("------------------------------------------");
+    console.log("englishKeywords:", asset.metadata.englishKeywords);
 
-    // TODO: Connect to real DB/IPFS
+    try {
+        // 2. Save to Firestore (Global Map Data)
+        // We only save essential fields for the map to save bandwidth/storage
+        const docRef = await addDoc(collection(db, "answer_assets"), {
+            assetId: asset.id,
+            userId: asset.userId, // In real app, hash this for privacy
+            content: asset.content, // Snippet
+            keywords: asset.metadata.englishKeywords || asset.tags,
+            sentiment: asset.metadata.externalInfo?.keySentiment || "Calm",
+            trustScore: asset.metadata.trustScore,
+            location: {
+                // Mock Random Location for Phase 5 Demo
+                // (In Phase 6, use navigator.geolocation)
+                lat: 37.5665 + (Math.random() - 0.5) * 10, // Around Seoul +/- 
+                lng: 126.9780 + (Math.random() - 0.5) * 20
+            },
+            createdAt: serverTimestamp()
+        });
+        console.log("✅ [Firebase] Document written with ID: ", docRef.id);
+    } catch (e) {
+        console.error("❌ [Firebase] Error adding document: ", e);
+    }
+
+    console.log("------------------------------------------");
 };
