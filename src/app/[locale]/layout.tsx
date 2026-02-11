@@ -15,13 +15,15 @@ export const metadata: Metadata = {
     description: "나만의 취향 나무, Taste Tree",
 };
 
+// Next.js 16에서는 params가 Promise 객체여야만 합니다.
 export default async function LocaleLayout(props: {
     children: React.ReactNode;
     params: Promise<{ locale: string }>;
 }) {
-    const params = await props.params;
-    const { locale } = params;
-    const { children } = props;
+    // 1. 반드시 props.params를 await로 기다려야 합니다.
+    const resolvedParams = await props.params;
+    const locale = resolvedParams.locale;
+    const children = props.children;
     // Provide all messages to the client
     const messages = await getMessages();
 
