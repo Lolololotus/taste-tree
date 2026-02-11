@@ -1,4 +1,4 @@
-# 🌳 Taste Tree: 인양된 기억이 머무는 다정한 숲 (Deployed 2026-02-12)
+# 🌳 Taste Tree: 인양된 기억이 머무는 다정한 숲 
 
 > **"당신의 30년 세월 속에 숨겨진 보물을 인양하여, 디지털 세계의 고유한 자산으로 꽃피웁니다."**
 > **"Dredging the hidden treasures of your 30 years and blooming them into unique digital assets."**
@@ -10,6 +10,7 @@
 Taste Tree는 인간 사유의 밀도를 보호하는 **SnF(Soft & Firm)** 생태계의 두 번째 여정입니다. 우리는 기술이 차가운 도구가 아닌, 인간의 영혼을 비추는 다정한 거울이 되길 바랍니다.
 
 * **☁️ Sense Your Day**: 당신의 오늘을 예술적 처방으로 수용하는 관문.
+* **💎Prism-Arcana**: 사유를 빛의 예술(스테인드글라스)로 형상화하는 실물 자산화 엔진.
 * **🌳 Taste Tree**: 파편화된 기억을 연결하여 다정한 숲을 이루는 **연결의 여정**.
 * **🏰 Deep-Reso**: 보호받아야 할 사유의 밀도를 증명하는 최후의 요새.
 
