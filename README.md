@@ -1,4 +1,4 @@
-# 🌳 Taste Tree: 인양된 기억이 머무는 다정한 숲
+# 🌳 Taste Tree: 인양된 기억이 머무는 다정한 숲 (Deployed 2026-02-12)
 
 > **"당신의 30년 세월 속에 숨겨진 보물을 인양하여, 디지털 세계의 고유한 자산으로 꽃피웁니다."**
 > **"Dredging the hidden treasures of your 30 years and blooming them into unique digital assets."**
