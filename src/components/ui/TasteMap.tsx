@@ -62,8 +62,8 @@ export function TasteMap() {
             >
                 {/* Map Interface */}
                 <Geographies geography={GEO_URL}>
-                    {({ geometries }) =>
-                        geometries && geometries.map((geo: any) => (
+                    {({ geometries }: any) =>
+                        geometries && (geometries as any[]).map((geo: any) => (
                             <Geography
                                 key={geo.rsmKey}
                                 geography={geo}
