@@ -15,14 +15,13 @@ export const metadata: Metadata = {
     description: "나만의 취향 나무, Taste Tree",
 };
 
-export default async function LocaleLayout({
-    children,
-    params
-}: {
+export default async function LocaleLayout(props: {
     children: React.ReactNode;
     params: Promise<{ locale: string }>;
 }) {
-    const { locale } = await params;
+    const params = await props.params;
+    const { locale } = params;
+    const { children } = props;
     // Provide all messages to the client
     const messages = await getMessages();
 
