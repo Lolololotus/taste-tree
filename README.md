@@ -3,16 +3,6 @@
 > **"당신의 30년 세월 속에 숨겨진 보물을 인양하여, 디지털 세계의 고유한 자산으로 꽃피웁니다."**
 > **"Dredging the hidden treasures of your 30 years and blooming them into unique digital assets."**
 
----
-
-## 🍃 Our Soil: The SnF Ecosystem
-
-Taste Tree는 인간 사유의 밀도를 보호하는 **SnF(Soft & Firm)** 생태계의 두 번째 여정입니다. 우리는 기술이 차가운 도구가 아닌, 인간의 영혼을 비추는 다정한 거울이 되길 바랍니다.
-
-* **☁️ Sense Your Day**: 당신의 오늘을 예술적 처방으로 수용하는 관문.
-* **💎Prism-Arcana**: 사유를 빛의 예술(스테인드글라스)로 형상화하는 실물 자산화 엔진.
-* **🌳 Taste Tree**: 파편화된 기억을 연결하여 다정한 숲을 이루는 **연결의 여정**.
-* **🏰 Deep-Reso**: 보호받아야 할 사유의 밀도를 증명하는 최후의 요새.
 
 ---
 
@@ -80,3 +70,23 @@ npm run dev
 ---
 
 Designed by SnF Founder Lotus | Engineered by Anti-Gravity | Cultivated by Jimini
+
+---
+
+## 🍃 SnF Ecosystem: The Restoration Journey
+"10년 차 마케터의 안목과 바이브 코딩이 만든 18일간의 초고속 실행 기록"
+
+### 🚀 Live Projects
+* **🪞 Double-Mirror**: AI와 인간의 이질성을 측정하여 존재의 유일함을 온체인으로 증명하는 Proof of Humanity.
+* **🛡️ Hyper ETF Guardian**: 자산운용 전문가의 실전 전략을 시스템화하여 자본 변동성으로부터 일상의 평온을 지키는 방어 프로토콜.
+
+### 🛠️ Challenges & Pivots
+* **🏰 Deep-Reso**: 밈의 시대를 넘어 인간 고유의 사유 밀도를 보존하는 PoDR(사유 증명) 엔진 R&D.
+* **💎 Prism-Arcana**: 내면의 사유를 시각화하여 NFT/RWA로 치환하는 실물 자산 기반 크리에이터 이코노미 실험.
+* **🌳 Taste Tree**: 파편화된 개인의 취향을 가드닝하여 글로벌 공동체로 연결하는 온체인 거버넌스 설계.
+* **☁️ Sense Your Day (Pivoted)**: 핵심 가치 집중을 위해 배포 초기 단계에서 Double-Mirror로 리소스 과감히 통합.
+
+### ⚡ Why SnF?
+- **초고속 실행력**: 밋업 참석 후 단 18일 만에 생태계 설계 및 2개의 라이브 서비스 배포 완료.
+- **Mass Adoption**: 철학·금융·예술의 층위에서 대중을 블록체인 생태계로 연결하는 탈중앙화 가속화.
+- **도메인 통찰**: 10년 마케팅 실무 노하우를 바이브 코딩으로 즉시 시스템화하는 변태적 디테일.
