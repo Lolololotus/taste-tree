@@ -65,7 +65,7 @@ npm run dev
 *   **Phase 5 (In Progress)**: Firestore 기반 Taste Pin Engine 및 7단계 인양 로직 고도화.
 *   **Phase 6 (Upcoming)**: Vercel 정식 배포, 모바일 환경 최적화 및 최종 감성 폴리싱.
 
-**Final Goal**: 2026. 02. 17. 정식 프로젝트 제출.
+~~Final Goal : 2026. 02. 17. 정식 프로젝트 제출.~~
 
 ---
 
